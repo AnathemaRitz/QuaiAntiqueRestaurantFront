@@ -5,6 +5,7 @@ const inputPrenom=document.getElementById("PrenomInput");
 const inputMail=document.getElementById("EmailInput")
 const inputPassword=document.getElementById("PasswordInput");
 const inputValidationPassword=document.getElementById("ValidatePasswordInput");
+const btnvalidation=document.getElementById("btn-validation-inscription");
 
 inputNom.addEventListener("keyup", validateForm);
 inputPrenom.addEventListener("keyup", validateForm);
@@ -12,20 +13,51 @@ inputMail.addEventListener("keyup", validateForm);
 inputPassword.addEventListener("keyup", validateForm);
 inputValidationPassword.addEventListener("keyup", validateForm);
 
+//Function permettant de valider tout le formulaire
 function validateForm(){
-    validateRequired(inputNom);
-    validateRequired(inputPrenom);
+    const nomOk= validateRequired(inputNom);
+    const prenomOK = validateRequired(inputPrenom);
+    const mailOk= validateMail(inputMail);
+
+    if(nomOk && prenomOK && mailOk){
+        btnvalidation.disabled = false;
+    }
+
+    else
+    {btnvalidation.disabled= true;
+    }
+}
+
+function validateMail (input){
+    //Définir mon regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mailUser = inputMail.value
+    if(mailUser.match(emailRegex)){
+        input.classList.add("is-valid");
+        input.classList.remove("is-invalid");
+        return true;
+        //C'est ok
+    }
+    else{
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+        return false;
+        //C'est pas ok
+    }
+    
 }
 
 function validateRequired(input){
     if(input.value != ""){
         input.classList.add("is-valid");
-        input.classList.remove("is-invalid")
+        input.classList.remove("is-invalid");
+        return true;
         //C'est ok
     }
     else{
         input.classList.remove("is-valid");
-        input.classList.add("is-invalid")
+        input.classList.add("is-invalid");
+        return false;
         //C'est pas ok
     }
 }
