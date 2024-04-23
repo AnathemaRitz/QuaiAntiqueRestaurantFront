@@ -19,8 +19,9 @@ function validateForm(){
     const prenomOK = validateRequired(inputPrenom);
     const mailOk= validateMail(inputMail);
     const passwordOk = validatePassword(inputPassword);
+    const passwordConfirmOk = validateConfirmationPassword(inputPassword, inputValidationPassword);
 
-    if(nomOk && prenomOK && mailOk && passwordOk){
+    if(nomOk && prenomOK && mailOk && passwordOk &&passwordConfirmOk){
         btnvalidation.disabled = false;
     }
 
@@ -46,6 +47,23 @@ function validateMail (input){
         //C'est pas ok
     }
 }
+
+
+function validateConfirmationPassword (inputPwd, inputConfirmPwd){
+    if(inputPwd.value == inputConfirmPwd.value){
+        inputConfirmPwd.classList.add("is-valid");
+        inputConfirmPwd.classList.remove("is-invalid");
+        return true;
+        //C'est ok
+    }
+    else{
+        inputConfirmPwd.classList.remove("is-valid");
+        inputConfirmPwd.classList.add("is-invalid");
+        return false;
+        //C'est pas ok
+    }
+}
+
 
 function validatePassword (input){
     //Définir mon regex
