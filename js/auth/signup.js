@@ -18,8 +18,9 @@ function validateForm(){
     const nomOk= validateRequired(inputNom);
     const prenomOK = validateRequired(inputPrenom);
     const mailOk= validateMail(inputMail);
+    const passwordOk = validatePassword(inputPassword);
 
-    if(nomOk && prenomOK && mailOk){
+    if(nomOk && prenomOK && mailOk && passwordOk){
         btnvalidation.disabled = false;
     }
 
@@ -44,8 +45,26 @@ function validateMail (input){
         return false;
         //C'est pas ok
     }
-    
 }
+
+function validatePassword (input){
+    //Définir mon regex
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
+    const passwordUser = inputPassword.value
+    if(passwordUser.match(passwordRegex)){
+        input.classList.add("is-valid");
+        input.classList.remove("is-invalid");
+        return true;
+        //C'est ok
+    }
+    else{
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+        return false;
+        //C'est pas ok
+    }
+}
+
 
 function validateRequired(input){
     if(input.value != ""){
