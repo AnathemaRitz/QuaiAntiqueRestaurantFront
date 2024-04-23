@@ -13,10 +13,11 @@ function checkCredentials(){
 
         //Il faudra récupérer le vrai token.
         const token ="lkjsdngfljsqdnglkjsdbglkjqskjgkfjgbqslkfdgbskldfgdfgsdgf";
+        setToken(token);
 
         //placer ce token en cookie
 
-        
+
         window.location.replace("/");
     }
     else{
